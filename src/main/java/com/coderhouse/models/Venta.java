@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -17,14 +18,16 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+@Schema(description="Modelo de Ventas")
 @Entity
 @Table(name = "Ventas")
 public class Venta {
-
+	
+	@Schema(description="Id De la venta",requiredMode=Schema.RequiredMode.REQUIRED )
 	@Id // Primary Key
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // AutoIncremental
 	private Long id;
-
+	@Schema(description="Nombre De la venta",requiredMode=Schema.RequiredMode.REQUIRED )
 	@Column(nullable = false)
 	private String nombre;
 
@@ -36,7 +39,7 @@ public class Venta {
 					name = "cliente_id"))
 	@JsonIgnore
 	private List<Cliente> clientes = new ArrayList<>();
-
+	@Schema(description="Venta del Producto",requiredMode=Schema.RequiredMode.REQUIRED )
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Producto producto;
 

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -13,28 +14,32 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
+@Schema(description="Modelo de Alumno")
 @Entity
 @Table(name = "Clientes")
 public class Cliente {
-
+	@Schema(description="Id Del Cliente",requiredMode=Schema.RequiredMode.REQUIRED )
 	@Id // Primary Key
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // AutoIncremental
 	private Long id;
+	@Schema(description="Nombre Del Cliente",requiredMode=Schema.RequiredMode.REQUIRED )
 	private String nombre;
+	@Schema(description="Apellido Del Cliente",requiredMode=Schema.RequiredMode.REQUIRED )
 	private String apellido;
-
+	@Schema(description="DNI Del Cliente",requiredMode=Schema.RequiredMode.REQUIRED )
 	@Column(unique = true, nullable = false)
 	private int dni;
-
+	@Schema(description="Legajo Del Cliente",requiredMode=Schema.RequiredMode.REQUIRED )
 	@Column(unique = true, nullable = false)
 	private String legajo;
 
+	@Schema(description="Lista de ventas del cliente ")
 	@ManyToMany(
 				mappedBy = "clientes", 
 				fetch = FetchType.EAGER
 			)
 	private List<Venta> ventas = new ArrayList<>();
-
+	@Schema(description="Fecha de ventas del cliente ")
 	private LocalDateTime createdAt = LocalDateTime.now();
 
 	

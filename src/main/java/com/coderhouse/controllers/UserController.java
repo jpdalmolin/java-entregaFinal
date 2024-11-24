@@ -15,9 +15,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.coderhouse.models.Producto;
 import com.coderhouse.models.User;
 import com.coderhouse.services.UserService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "Gestion de Usuarios", description="Endpoints para gestionar Usuarios")
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -25,6 +34,12 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	@Operation(summary="Obtener lista de Usuarios")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Lista de Usuarios obtenida correctamente", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = User.class)) }),
+			@ApiResponse(responseCode = "500", description = "Error interno del servidor", content = @Content)
+	})
 	@GetMapping(value = "/", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<List<User>> getAllUsers() {
 		try {
@@ -36,7 +51,13 @@ public class UserController {
 			return ResponseEntity.internalServerError().build();
 		}
 	}
-
+	
+	@Operation(summary="Obtener Usuario por ID")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Usuario obtenido correctamente", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = User.class)) }),
+			@ApiResponse(responseCode = "500", description = "Error interno del servidor", content = @Content)
+	})
 	@GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<User> getUserById(@PathVariable String id) {
 		try {
@@ -46,7 +67,13 @@ public class UserController {
 			return ResponseEntity.internalServerError().build();
 		}
 	}
-
+	
+	@Operation(summary="Crear Usuario")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Usuario creado correctamente", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = User.class)) }),
+			@ApiResponse(responseCode = "500", description = "Error interno del servidor", content = @Content)
+	})
 	@PostMapping(value = "/", consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<User> adduser(@RequestBody User user) {
 		try {
@@ -58,7 +85,13 @@ public class UserController {
 			return ResponseEntity.internalServerError().build();
 		}
 	}
-
+	
+	@Operation(summary="Editar Usuario")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Usuario editado correctamente", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = User.class)) }),
+			@ApiResponse(responseCode = "500", description = "Error interno del servidor", content = @Content)
+	})
 	@PutMapping(value = "/{id}", consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<User> updateUser(@PathVariable String id, @RequestBody User user) {
 		try {
@@ -72,6 +105,12 @@ public class UserController {
 		}
 	}
 
+	@Operation(summary="Borrar Usuario")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Usuario borrado correctamente", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = User.class)) }),
+			@ApiResponse(responseCode = "500", description = "Error interno del servidor", content = @Content)
+	})
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> deleteUser(@PathVariable String id) {
 		try {

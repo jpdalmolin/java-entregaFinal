@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -14,14 +15,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+@Schema(description="Modelo de Productos")
 @Entity
 @Table(name = "Productos")
 public class Producto {
-
+	
+	@Schema(description="Id Del Producto",requiredMode=Schema.RequiredMode.REQUIRED )
 	@Id // Primary Key
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // AutoIncremental
 	private Long id;
-
+	@Schema(description="Nombre Del Producto",requiredMode=Schema.RequiredMode.REQUIRED )
 	@Column(nullable = false)
 	private String nombre;
 
