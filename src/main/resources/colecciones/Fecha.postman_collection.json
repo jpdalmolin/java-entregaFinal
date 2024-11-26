@@ -1,0 +1,30 @@
+{
+	"info": {
+		"_postman_id": "2aed9c4c-72fa-4c0d-bbb1-7b4c9b9067bd",
+		"name": "Fecha",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39621555"
+	},
+	"item": [
+		{
+			"name": "Get fecha from api",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/fecha",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"fecha"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
