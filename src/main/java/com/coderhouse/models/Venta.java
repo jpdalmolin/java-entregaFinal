@@ -1,6 +1,9 @@
 package com.coderhouse.models;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -84,7 +87,9 @@ public class Venta {
 	public void setProducto(Producto producto) {
 		this.producto = producto;
 	}
+	
 
+	
 	@Override
 	public String toString() {
 		return "Venta [id=" + id + ", nombre=" + nombre + ", producto=" + producto + "]";
